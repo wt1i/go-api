@@ -12,7 +12,7 @@ type NewsRepository interface {
 	// GetBySlug obtain news list by slug
 	GetBySlug(slug string) ([]model.News, error)
 	// GetAllByStatus obtain news by status
-	GetAllByStatus(status string, offset, limit int) ([]model.News, error)
+	GetAllByStatus(status model.NewsStatus, pagination model.Pagination) ([]model.News, error)
 	// Save news save
 	Save(*model.News) error
 	// Remove news remove by id

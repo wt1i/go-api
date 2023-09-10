@@ -13,7 +13,15 @@ type NewsHandler struct {
 	NewsService *application.NewsService `inject:""`
 }
 
-// GetNews get news
+// GetNews godoc
+// @Summary Show an news
+// @Description get news by ID
+// @Tags News
+// @Accept  json
+// @Produce  json
+// @Param news_id path uint true "News ID"
+// @Success 200 {object} model.News
+// @Router /api/v1/news/:news_id [get]
 func (s *NewsHandler) GetNews(c *gin.Context) {
 	var r application.GetNewsReq
 
@@ -33,7 +41,18 @@ func (s *NewsHandler) GetNews(c *gin.Context) {
 
 }
 
-// GetAllNews get all news
+// GetAllNews godoc
+// @Summary Show all news
+// @Description show all news by status
+// @Tags News
+// @Accept  json
+// @Produce  json
+// @Param status query string false "news's status exist draft|deleted|publish"
+// @Param page query int false "page, default is 1"
+// @Param page_size query int false "page size, default is 20"
+// @Param ordering query string false "order by, default is id, enable multiple fields, example: ordering=-name,id"
+// @Success 200 {object} []model.News
+// @Router /functions [get]
 func (s *NewsHandler) GetAllNews(c *gin.Context) {
 	var r application.GetAllNewsReq
 
@@ -52,7 +71,15 @@ func (s *NewsHandler) GetAllNews(c *gin.Context) {
 	utils.JSON(c, http.StatusOK, news)
 }
 
-// CreateNews create news
+// CreateNews godoc
+// @Summary create an news
+// @Description create news
+// @Tags News
+// @Accept  json
+// @Produce  json
+// @Param request_data body application.UpsertNewsReq true "news info"
+// @Success 200 {object} model.News
+// @Router /api/v1/news [post]
 func (s *NewsHandler) CreateNews(c *gin.Context) {
 	var r application.UpsertNewsReq
 
@@ -70,7 +97,15 @@ func (s *NewsHandler) CreateNews(c *gin.Context) {
 	utils.JSON(c, http.StatusCreated, nil)
 }
 
-// RemoveNews remove news
+// RemoveNews godoc
+// @Summary remove an news
+// @Description remove news by ID
+// @Tags News
+// @Accept  json
+// @Produce  json
+// @Param news_id path uint true "News ID"
+// @Success 200 {object} model.News
+// @Router /api/v1/news/:news_id [delete]
 func (s *NewsHandler) RemoveNews(c *gin.Context) {
 	var r application.RemoveNewsReq
 
@@ -87,9 +122,23 @@ func (s *NewsHandler) RemoveNews(c *gin.Context) {
 	utils.JSON(c, http.StatusOK, nil)
 }
 
-// UpdateNews update news
+// UpdateNews godoc
+// @Summary update an news
+// @Description update news
+// @Tags News
+// @Accept  json
+// @Produce  json
+// @Param news_id path uint true "News ID"
+// @Param request_data body application.UpsertNewsReq true "news info"
+// @Success 200 {object} nil
+// @Router /api/v1/news/:news_id [post]
 func (s *NewsHandler) UpdateNews(c *gin.Context) {
 	var r application.UpsertNewsReq
+
+	if err := c.ShouldBindUri(&r); err != nil {
+		utils.Error(c, http.StatusBadRequest, "param invaild", err)
+		return
+	}
 
 	if err := c.ShouldBindJSON(&r); err != nil {
 		utils.Error(c, http.StatusBadRequest, "param invaild", err)

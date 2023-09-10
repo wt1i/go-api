@@ -1,4 +1,291 @@
+definitions:
+  application.UpsertNewsReq:
+    properties:
+      content:
+        type: string
+      id:
+        type: integer
+      slug:
+        type: string
+      status:
+        type: string
+      title:
+        type: string
+    type: object
+  application.UpsertTopicReq:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      slug:
+        type: string
+    type: object
+  model.News:
+    properties:
+      content:
+        type: string
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: integer
+      slug:
+        type: string
+      status:
+        type: string
+      title:
+        type: string
+      topic:
+        items:
+          $ref: '#/definitions/model.Topic'
+        type: array
+      updated_at:
+        type: string
+    type: object
+  model.Topic:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      news:
+        items:
+          $ref: '#/definitions/model.News'
+        type: array
+      slug:
+        type: string
+      updated_at:
+        type: string
+    type: object
 info:
   contact: {}
-paths: {}
+paths:
+  /api/v1/news:
+    post:
+      consumes:
+      - application/json
+      description: create news
+      parameters:
+      - description: news info
+        in: body
+        name: request_data
+        required: true
+        schema:
+          $ref: '#/definitions/application.UpsertNewsReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.News'
+      summary: create an news
+      tags:
+      - News
+  /api/v1/news/:news_id:
+    delete:
+      consumes:
+      - application/json
+      description: remove news by ID
+      parameters:
+      - description: News ID
+        in: path
+        name: news_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.News'
+      summary: remove an news
+      tags:
+      - News
+    get:
+      consumes:
+      - application/json
+      description: get news by ID
+      parameters:
+      - description: News ID
+        in: path
+        name: news_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.News'
+      summary: Show an news
+      tags:
+      - News
+    post:
+      consumes:
+      - application/json
+      description: update news
+      parameters:
+      - description: News ID
+        in: path
+        name: news_id
+        required: true
+        type: integer
+      - description: news info
+        in: body
+        name: request_data
+        required: true
+        schema:
+          $ref: '#/definitions/application.UpsertNewsReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: update an news
+      tags:
+      - News
+  /api/v1/topic:
+    get:
+      consumes:
+      - application/json
+      description: Show all topic
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Topic'
+      summary: Show all topic
+      tags:
+      - topic
+    post:
+      consumes:
+      - application/json
+      description: create topic
+      parameters:
+      - description: topic info
+        in: body
+        name: request_data
+        required: true
+        schema:
+          $ref: '#/definitions/application.UpsertTopicReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Topic'
+      summary: create an topic
+      tags:
+      - Topic
+  /api/v1/topic/:topic_id:
+    delete:
+      consumes:
+      - application/json
+      description: remove topic by ID
+      parameters:
+      - description: topic ID
+        in: path
+        name: topic_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Topic'
+      summary: remove an topic
+      tags:
+      - Topic
+    get:
+      consumes:
+      - application/json
+      description: get topic by ID
+      parameters:
+      - description: topic ID
+        in: path
+        name: topic_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Topic'
+      summary: Show an topic
+      tags:
+      - topic
+    post:
+      consumes:
+      - application/json
+      description: update topic
+      parameters:
+      - description: topic ID
+        in: path
+        name: topic_id
+        required: true
+        type: integer
+      - description: topic info
+        in: body
+        name: request_data
+        required: true
+        schema:
+          $ref: '#/definitions/application.UpsertTopicReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: update an topic
+      tags:
+      - Topic
+  /functions:
+    get:
+      consumes:
+      - application/json
+      description: show all news by status
+      parameters:
+      - description: news's status exist draft|deleted|publish
+        in: query
+        name: status
+        type: string
+      - description: page, default is 1
+        in: query
+        name: page
+        type: integer
+      - description: page size, default is 20
+        in: query
+        name: page_size
+        type: integer
+      - description: 'order by, default is id, enable multiple fields, example: ordering=-name,id'
+        in: query
+        name: ordering
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.News'
+            type: array
+      summary: Show all news
+      tags:
+      - News
 swagger: "2.0"

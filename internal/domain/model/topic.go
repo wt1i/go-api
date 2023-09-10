@@ -12,3 +12,13 @@ type Topic struct {
 func (Topic) TableName() string {
 	return "topics"
 }
+
+type TopicList []Topic
+
+func (n TopicList) ToMapByTitle() map[string]Topic {
+	toMap := make(map[string]Topic, len(n))
+	for _, v := range n {
+		toMap[v.Name] = v
+	}
+	return toMap
+}

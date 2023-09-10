@@ -52,12 +52,6 @@ func (r *NewsRepositoryImpl) Remove(id uint) error {
 		return err
 	}
 
-	news.Status = "deleted"
-	if err := tx.Save(&news).Error; err != nil {
-		tx.Rollback()
-		return err
-	}
-
 	if err := tx.Delete(&news).Error; err != nil {
 		tx.Rollback()
 		return err
@@ -79,16 +73,16 @@ func (r *NewsRepositoryImpl) Update(news *model.News) error {
 }
 
 // GetAll News return all domain.news
-func (r *NewsRepositoryImpl) GetAllByStatus(status string, offset, limit int) ([]model.News, error) {
+func (r *NewsRepositoryImpl) GetAllByStatus(status model.NewsStatus, pagination model.Pagination) ([]model.News, error) {
 	var db *gorm.DB
-	if status == "deleted" {
+	if status == model.NewsStatusDelete {
 		db = r.DB.Unscoped()
 	} else {
 		db = r.DB
 	}
 
 	news := []model.News{}
-	if err := db.Where("status = ?", status).Where("id > ?", offset).Preload("Topic").Find(&news).Limit(limit).Error; err != nil {
+	if err := pagination.PagedDB(db).Where("status = ?", status).Preload("Topic").Find(&news).Error; err != nil {
 		return nil, err
 	}
 

@@ -1,7 +1,7 @@
 package application
 
 import (
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 
 	model "github.com/liwentao0503/go-api/internal/domain/model"
 	"github.com/liwentao0503/go-api/internal/domain/repository"
@@ -23,11 +23,11 @@ func (s *NewsService) GetNews(req GetNewsReq) (*model.News, error) {
 }
 
 type UpsertNewsReq struct {
-	ID      uint   `json:"id"`
-	Title   string `json:"title"`
-	Slug    string `json:"slug"`
-	Content string `json:"content"`
-	Status  string `json:"status"`
+	ID      uint             `json:"id"`
+	Title   string           `json:"title"`
+	Slug    string           `json:"slug"`
+	Content string           `json:"content"`
+	Status  model.NewsStatus `json:"status"`
 }
 
 func (a UpsertNewsReq) BuildModelNews() model.News {
@@ -61,12 +61,11 @@ func (s *NewsService) UpdateNews(p model.News, id uint) error {
 }
 
 type GetAllNewsReq struct {
-	Status string `form:"status"`
-	Limit  int    `form:"limit"`
-	Offset int    `form:"offset"`
+	Status     model.NewsStatus `form:"status"`
+	Pagination model.Pagination
 }
 
 // GetAllNewsByFilter return all model.News by filter
 func (s *NewsService) GetAllNewsByFilter(req GetAllNewsReq) ([]model.News, error) {
-	return s.NewsRepo.GetAllByStatus(req.Status, req.Offset, req.Limit)
+	return s.NewsRepo.GetAllByStatus(req.Status, req.Pagination)
 }

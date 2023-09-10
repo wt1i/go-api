@@ -51,7 +51,7 @@ type RemoveTopicReq struct {
 }
 
 // RemoveTopic do remove topic by id
-func (s *TopicService) RemoveTopic(id int) error {
+func (s *TopicService) RemoveTopic(id uint) error {
 	return s.TopicRepo.Remove(id)
 }
 

@@ -44,7 +44,7 @@ func (r *TopicRepositoryImpl) Save(topic *model.Topic) error {
 }
 
 // Remove delete topic
-func (r *TopicRepositoryImpl) Remove(id int) error {
+func (r *TopicRepositoryImpl) Remove(id uint) error {
 	topic := &model.Topic{}
 	if err := r.DB.First(&topic, id).Error; err != nil {
 		return err
@@ -59,7 +59,10 @@ func (r *TopicRepositoryImpl) Remove(id int) error {
 
 // Update data topic
 func (r *TopicRepositoryImpl) Update(topic *model.Topic) error {
-	if err := r.DB.Model(&topic).UpdateColumns(model.Topic{Name: topic.Name, Slug: topic.Slug}).Error; err != nil {
+	if err := r.DB.Model(&topic).UpdateColumns(model.Topic{
+		Name: topic.Name,
+		Slug: topic.Slug,
+	}).Error; err != nil {
 		return err
 	}
 

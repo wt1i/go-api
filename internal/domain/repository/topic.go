@@ -10,6 +10,6 @@ type TopicRepository interface {
 	Get(id uint) (*model.Topic, error)
 	GetAll() ([]model.Topic, error)
 	Save(*model.Topic) error
-	Remove(id int) error
+	Remove(id uint) error
 	Update(*model.Topic) error
 }
