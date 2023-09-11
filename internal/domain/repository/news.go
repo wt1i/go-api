@@ -9,8 +9,6 @@ import (
 type NewsRepository interface {
 	// Get obtain news by id
 	Get(id uint) (*model.News, error)
-	// GetBySlug obtain news list by slug
-	GetBySlug(slug string) ([]model.News, error)
 	// GetAllByStatus obtain news by status
 	GetAllByStatus(status model.NewsStatus, pagination model.Pagination) ([]model.News, error)
 	// Save news save

@@ -88,29 +88,3 @@ func (r *NewsRepositoryImpl) GetAllByStatus(status model.NewsStatus, pagination 
 
 	return news, nil
 }
-
-// GetBySlug News return all []model.News by topic.slug
-func (r *NewsRepositoryImpl) GetBySlug(slug string) ([]model.News, error) {
-	rows, err := r.DB.Raw("SELECT news.id, news.title, news.slug, news.content, news.status FROM `news_topics`"+
-		" LEFT JOIN news ON news_topics.news_id=news.id WHERE "+
-		"news_topics.topic_id=(SELECT id as topic_id FROM `topics`"+
-		" WHERE slug = ?)", slug).Rows() // (*sql.Rows, error)
-	if err != nil {
-		return nil, err
-	}
-
-	defer rows.Close()
-
-	us := make([]model.News, 0, 10)
-	for rows.Next() {
-		u := model.News{}
-		err = rows.Scan(&u.ID, &u.Title, &u.Slug, &u.Content, &u.Status)
-
-		if err != nil {
-			return nil, err
-		}
-		us = append(us, u)
-	}
-
-	return us, nil
-}
