@@ -71,7 +71,14 @@ func (s *RouterHandler) webRoute(router *gin.Engine) {
 	router.GET("/api/v1/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 }
 
-// migrate db migrate handler
+// migrate godoc
+// @Summary migrate db
+// @Description migrate db
+// @Tags migrate
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} string
+// @Router /api/v1/migrate [post]
 func (s *RouterHandler) migrate(c *gin.Context) {
 	err := s.MigrateAction.DBMigrate()
 	if err != nil {

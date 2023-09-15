@@ -66,6 +66,21 @@ definitions:
 info:
   contact: {}
 paths:
+  /api/v1/migrate:
+    post:
+      consumes:
+      - application/json
+      description: migrate db
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: migrate db
+      tags:
+      - migrate
   /api/v1/news:
     post:
       consumes:
