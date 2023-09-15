@@ -11,11 +11,12 @@ const (
 // News represent entity of the news
 type News struct {
 	BaseModel
+	TopicID uint       `json:"topic_id"`
 	Title   string     `json:"title"`
 	Slug    string     `json:"slug"`
 	Content string     `json:"content" gorm:"text"`
 	Status  NewsStatus `json:"status"`
-	Topic   TopicList  `gorm:"many2many:news_topics;"`
+	Topic   Topic      `json:"topic" gorm:"foreignKey:TopicID"`
 }
 
 // TableName table name

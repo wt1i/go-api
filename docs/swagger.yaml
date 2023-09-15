@@ -11,6 +11,8 @@ definitions:
         type: string
       title:
         type: string
+      topic_id:
+        type: integer
     type: object
   application.UpsertTopicReq:
     properties:
@@ -38,9 +40,9 @@ definitions:
       title:
         type: string
       topic:
-        items:
-          $ref: '#/definitions/model.Topic'
-        type: array
+        $ref: '#/definitions/model.Topic'
+      topic_id:
+        type: integer
       updated_at:
         type: string
     type: object
@@ -54,10 +56,6 @@ definitions:
         type: integer
       name:
         type: string
-      news:
-        items:
-          $ref: '#/definitions/model.News'
-        type: array
       slug:
         type: string
       updated_at:

@@ -375,6 +375,9 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "topic_id": {
+                    "type": "integer"
                 }
             }
         },
@@ -417,10 +420,10 @@
                     "type": "string"
                 },
                 "topic": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/model.Topic"
-                    }
+                    "$ref": "#/definitions/model.Topic"
+                },
+                "topic_id": {
+                    "type": "integer"
                 },
                 "updated_at": {
                     "type": "string"
@@ -441,12 +444,6 @@
                 },
                 "name": {
                     "type": "string"
-                },
-                "news": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/model.News"
-                    }
                 },
                 "slug": {
                     "type": "string"

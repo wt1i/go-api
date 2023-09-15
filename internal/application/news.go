@@ -24,6 +24,7 @@ func (s *NewsService) GetNews(req GetNewsReq) (*model.News, error) {
 
 type UpsertNewsReq struct {
 	ID      uint             `json:"id"`
+	TopicID uint             `json:"topic_id"`
 	Title   string           `json:"title"`
 	Slug    string           `json:"slug"`
 	Content string           `json:"content"`
@@ -32,6 +33,7 @@ type UpsertNewsReq struct {
 
 func (a UpsertNewsReq) BuildModelNews() model.News {
 	return model.News{
+		TopicID: a.TopicID,
 		Title:   a.Title,
 		Slug:    a.Slug,
 		Content: a.Content,

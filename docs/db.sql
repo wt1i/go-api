@@ -5,6 +5,7 @@ CREATE TABLE `news` (
                         `created_at` datetime DEFAULT NULL,
                         `updated_at` datetime DEFAULT NULL,
                         `deleted_at` datetime DEFAULT NULL,
+                        `topic_id` int(10) UNSIGNED NOT NULL,
                         `title` varchar(255) DEFAULT NULL,
                         `slug` varchar(255) DEFAULT NULL,
                         `content` text,
@@ -22,10 +23,4 @@ CREATE TABLE `topics` (
                           `slug` varchar(255) DEFAULT NULL,
                           PRIMARY KEY (`id`),
                           KEY `idx_topics_deleted_at` (`deleted_at`)
-) ENGINE = InnoDB CHARSET = utf8mb4;
-
-CREATE TABLE `news_topics` (
-                               `news_id` int(10) UNSIGNED NOT NULL,
-                               `topic_id` int(10) UNSIGNED NOT NULL,
-                               PRIMARY KEY (`news_id`, `topic_id`)
 ) ENGINE = InnoDB CHARSET = utf8mb4;

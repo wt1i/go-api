@@ -27,7 +27,7 @@ func (r *TopicRepositoryImpl) Get(id uint) (*model.Topic, error) {
 // GetAll topic return all domain.topic
 func (r *TopicRepositoryImpl) GetAll() ([]model.Topic, error) {
 	topics := []model.Topic{}
-	if err := r.DB.Preload("News").Find(&topics).Error; err != nil {
+	if err := r.DB.Find(&topics).Error; err != nil {
 		return nil, err
 	}
 

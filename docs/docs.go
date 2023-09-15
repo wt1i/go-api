@@ -386,6 +386,9 @@ const docTemplate = `{
                 },
                 "title": {
                     "type": "string"
+                },
+                "topic_id": {
+                    "type": "integer"
                 }
             }
         },
@@ -428,10 +431,10 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "topic": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/model.Topic"
-                    }
+                    "$ref": "#/definitions/model.Topic"
+                },
+                "topic_id": {
+                    "type": "integer"
                 },
                 "updated_at": {
                     "type": "string"
@@ -452,12 +455,6 @@ const docTemplate = `{
                 },
                 "name": {
                     "type": "string"
-                },
-                "news": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/model.News"
-                    }
                 },
                 "slug": {
                     "type": "string"
