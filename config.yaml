@@ -9,8 +9,8 @@ app:
 
 # db config
 db:
-  user: "m_syscfaas_dy"
-  password: "O19cDYjcO76V1J^Ww!zi"
-  host: "syscaptainfaas.mysql.db.lpt.qa.nt.ctripcorp.com"
-  port: "55444"
-  dbname: "syscaptainfaasdb"
+  user: ""
+  password: ""
+  host: ""
+  port: ""
+  dbname: ""
