@@ -12,6 +12,8 @@ install:
 gotool:
 	go fmt ./...
 	golangci-lint run ./...
+run:
+	go run main.go
 clean:
 	@if [ -f ${BINARY} ] ; then rm ${BINARY} ; fi
 help:
