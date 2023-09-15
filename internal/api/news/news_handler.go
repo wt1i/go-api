@@ -50,13 +50,12 @@ func (s *NewsHandler) GetNews(c *gin.Context) {
 // @Param status query string false "news's status exist draft|deleted|publish"
 // @Param page query int false "page, default is 1"
 // @Param page_size query int false "page size, default is 20"
-// @Param ordering query string false "order by, default is id, enable multiple fields, example: ordering=-name,id"
 // @Success 200 {object} []model.News
-// @Router /functions [get]
+// @Router /api/v1/news [get]
 func (s *NewsHandler) GetAllNews(c *gin.Context) {
 	var r application.GetAllNewsReq
 
-	if err := c.ShouldBindUri(&r); err != nil {
+	if err := c.ShouldBindQuery(&r); err != nil {
 		utils.Error(c, http.StatusBadRequest, "param invaild", err)
 		return
 	}

@@ -39,6 +39,50 @@ const docTemplate = `{
             }
         },
         "/api/v1/news": {
+            "get": {
+                "description": "show all news by status",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "News"
+                ],
+                "summary": "Show all news",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "news's status exist draft|deleted|publish",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page, default is 1",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "page size, default is 20",
+                        "name": "page_size",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.News"
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "create news",
                 "consumes": [
@@ -318,58 +362,6 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/model.Topic"
-                        }
-                    }
-                }
-            }
-        },
-        "/functions": {
-            "get": {
-                "description": "show all news by status",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "News"
-                ],
-                "summary": "Show all news",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "news's status exist draft|deleted|publish",
-                        "name": "status",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "page, default is 1",
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "page size, default is 20",
-                        "name": "page_size",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "order by, default is id, enable multiple fields, example: ordering=-name,id",
-                        "name": "ordering",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/model.News"
-                            }
                         }
                     }
                 }
