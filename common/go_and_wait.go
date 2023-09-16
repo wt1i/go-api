@@ -11,7 +11,8 @@ const (
 	DefaultStackSize = 4096
 )
 
-type ContextHandle func(context.Context) error
+// int 为 for range 的下标 不然需要写非常复杂 逻辑才能把下标传入进去
+type ContextHandle func(context.Context, int) error
 
 type errList []error
 
@@ -39,7 +40,7 @@ func GoAndWait(ctx context.Context, handlers []ContextHandle) errList {
 					errList[i] = fmt.Errorf("[panic] err: %v\nstack: %s", err, getCurrentGoroutineStack())
 				}
 			}()
-			if err := handlers[i](ctx); err != nil {
+			if err := handlers[i](ctx, i); err != nil {
 				errList[i] = err
 			}
 		}(ctx, i)
