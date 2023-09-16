@@ -93,5 +93,5 @@ func (s *RouterHandler) migrate(c *gin.Context) {
 
 // home index handler
 func (s *RouterHandler) home(c *gin.Context) {
-	c.String(http.StatusOK, "GO DDD API")
+	c.String(http.StatusOK, "GO API")
 }

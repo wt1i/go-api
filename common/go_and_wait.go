@@ -11,7 +11,7 @@ const (
 	DefaultStackSize = 4096
 )
 
-// int 为 for range 的下标 不然需要写非常复杂 逻辑才能把下标传入进去
+// int 为 for range 的下标, 处理 for range 里面创建 Handle 才能更加得心应手
 type ContextHandle func(context.Context, int) error
 
 type errList []error
