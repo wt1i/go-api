@@ -116,7 +116,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/news/:news_id": {
+        "/api/v1/news/{news_id}": {
             "get": {
                 "description": "get news by ID",
                 "consumes": [
@@ -147,7 +147,7 @@ const docTemplate = `{
                     }
                 }
             },
-            "post": {
+            "put": {
                 "description": "update news",
                 "consumes": [
                     "application/json"
@@ -224,7 +224,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "topic"
+                    "Topic"
                 ],
                 "summary": "Show all topic",
                 "responses": {
@@ -269,7 +269,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/topic/:topic_id": {
+        "/api/v1/topic/{topic_id}": {
             "get": {
                 "description": "get topic by ID",
                 "consumes": [
@@ -279,7 +279,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "topic"
+                    "Topic"
                 ],
                 "summary": "Show an topic",
                 "parameters": [
@@ -300,7 +300,7 @@ const docTemplate = `{
                     }
                 }
             },
-            "post": {
+            "put": {
                 "description": "update topic",
                 "consumes": [
                     "application/json"

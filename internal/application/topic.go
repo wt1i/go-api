@@ -11,7 +11,7 @@ type TopicService struct {
 }
 
 type GetTopicReq struct {
-	TopicID uint `form:"topic_id"`
+	TopicID uint `uri:"topic_id"`
 }
 
 // GetTopic returns a topic by id
@@ -25,7 +25,7 @@ func (s *TopicService) GetAllTopic() ([]model.Topic, error) {
 }
 
 type UpsertTopicReq struct {
-	ID   uint   `json:"id"`
+	ID   uint   `uri:"id"`
 	Name string `json:"name"`
 	Slug string `json:"slug"`
 }
@@ -47,7 +47,7 @@ func (s *TopicService) AddTopic(name string, slug string) error {
 }
 
 type RemoveTopicReq struct {
-	TopicID uint `form:"topic_id"`
+	TopicID uint `uri:"topic_id"`
 }
 
 // RemoveTopic do remove topic by id

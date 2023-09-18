@@ -43,10 +43,20 @@ func (r *TopicRepositoryImpl) Save(topic *model.Topic) error {
 	return nil
 }
 
-// Remove delete topic
-func (r *TopicRepositoryImpl) Remove(id uint) error {
+// Remove delete topic and news
+func (r *TopicRepositoryImpl) Remove(id uint) (err error) {
+	tx := r.DB.Begin()
+
+	defer func() {
+		err = TxErrDefer(tx, err)
+	}()
+
 	topic := &model.Topic{}
 	if err := r.DB.First(&topic, id).Error; err != nil {
+		return err
+	}
+
+	if err := r.DB.Where("topic_id = ?", topic.ID).Delete(&model.News{}).Error; IsDBError(err) {
 		return err
 	}
 

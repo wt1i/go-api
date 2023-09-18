@@ -34,30 +34,23 @@ func (r *NewsRepositoryImpl) Save(news *model.News) error {
 }
 
 // Remove to delete news by id
-func (r *NewsRepositoryImpl) Remove(id uint) error {
+func (r *NewsRepositoryImpl) Remove(id uint) (err error) {
 	tx := r.DB.Begin()
-	defer func() {
-		if r := recover(); r != nil {
-			tx.Rollback()
-		}
-	}()
 
-	if err := tx.Error; err != nil {
-		return err
-	}
+	defer func() {
+		err = TxErrDefer(tx, err)
+	}()
 
 	news := model.News{}
 	if err := tx.First(&news, id).Error; err != nil {
-		tx.Rollback()
 		return err
 	}
 
 	if err := tx.Delete(&news).Error; err != nil {
-		tx.Rollback()
 		return err
 	}
 
-	return tx.Commit().Error
+	return nil
 }
 
 // Update is update news

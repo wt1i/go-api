@@ -21,7 +21,7 @@ type NewsHandler struct {
 // @Produce  json
 // @Param news_id path uint true "News ID"
 // @Success 200 {object} model.News
-// @Router /api/v1/news/:news_id [get]
+// @Router /api/v1/news/{news_id} [get]
 func (s *NewsHandler) GetNews(c *gin.Context) {
 	var r application.GetNewsReq
 
@@ -104,7 +104,7 @@ func (s *NewsHandler) CreateNews(c *gin.Context) {
 // @Produce  json
 // @Param news_id path uint true "News ID"
 // @Success 200 {object} model.News
-// @Router /api/v1/news/:news_id [delete]
+// @Router /api/v1/news/{news_id} [delete]
 func (s *NewsHandler) RemoveNews(c *gin.Context) {
 	var r application.RemoveNewsReq
 
@@ -130,7 +130,7 @@ func (s *NewsHandler) RemoveNews(c *gin.Context) {
 // @Param news_id path uint true "News ID"
 // @Param request_data body application.UpsertNewsReq true "news info"
 // @Success 200 {object} nil
-// @Router /api/v1/news/:news_id [post]
+// @Router /api/v1/news/{news_id} [put]
 func (s *NewsHandler) UpdateNews(c *gin.Context) {
 	var r application.UpsertNewsReq
 

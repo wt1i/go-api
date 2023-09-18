@@ -130,7 +130,7 @@ paths:
       summary: create an news
       tags:
       - News
-  /api/v1/news/:news_id:
+  /api/v1/news/{news_id}:
     delete:
       consumes:
       - application/json
@@ -171,7 +171,7 @@ paths:
       summary: Show an news
       tags:
       - News
-    post:
+    put:
       consumes:
       - application/json
       description: update news
@@ -209,7 +209,7 @@ paths:
             $ref: '#/definitions/model.Topic'
       summary: Show all topic
       tags:
-      - topic
+      - Topic
     post:
       consumes:
       - application/json
@@ -231,7 +231,7 @@ paths:
       summary: create an topic
       tags:
       - Topic
-  /api/v1/topic/:topic_id:
+  /api/v1/topic/{topic_id}:
     delete:
       consumes:
       - application/json
@@ -271,8 +271,8 @@ paths:
             $ref: '#/definitions/model.Topic'
       summary: Show an topic
       tags:
-      - topic
-    post:
+      - Topic
+    put:
       consumes:
       - application/json
       description: update topic

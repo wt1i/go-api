@@ -14,7 +14,7 @@ type NewsService struct {
 }
 
 type GetNewsReq struct {
-	NewsID uint `form:"news_id"`
+	NewsID uint `uri:"news_id"`
 }
 
 // GetNews returns domain.news by id
@@ -23,7 +23,7 @@ func (s *NewsService) GetNews(req GetNewsReq) (*model.News, error) {
 }
 
 type UpsertNewsReq struct {
-	ID      uint             `json:"id"`
+	ID      uint             `uri:"id"`
 	TopicID uint             `json:"topic_id"`
 	Title   string           `json:"title"`
 	Slug    string           `json:"slug"`
@@ -47,7 +47,7 @@ func (s *NewsService) AddNews(p model.News) error {
 }
 
 type RemoveNewsReq struct {
-	NewsID uint `form:"news_id"`
+	NewsID uint `uri:"news_id"`
 }
 
 // RemoveNews do remove news by id

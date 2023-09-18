@@ -16,12 +16,12 @@ type TopicHandler struct {
 // GetTopic godoc
 // @Summary Show an topic
 // @Description get topic by ID
-// @Tags topic
+// @Tags Topic
 // @Accept  json
 // @Produce  json
 // @Param topic_id path uint true "topic ID"
 // @Success 200 {object} model.Topic
-// @Router /api/v1/topic/:topic_id [get]
+// @Router /api/v1/topic/{topic_id} [get]
 func (s *TopicHandler) GetTopic(c *gin.Context) {
 	var r application.GetTopicReq
 
@@ -42,7 +42,7 @@ func (s *TopicHandler) GetTopic(c *gin.Context) {
 // GetAllTopic godoc
 // @Summary Show all topic
 // @Description Show all topic
-// @Tags topic
+// @Tags Topic
 // @Accept  json
 // @Produce  json
 // @Success 200 {object} model.Topic
@@ -90,7 +90,7 @@ func (s *TopicHandler) CreateTopic(c *gin.Context) {
 // @Produce  json
 // @Param topic_id path uint true "topic ID"
 // @Success 200 {object} model.Topic
-// @Router /api/v1/topic/:topic_id [delete]
+// @Router /api/v1/topic/{topic_id} [delete]
 func (s *TopicHandler) RemoveTopic(c *gin.Context) {
 	var r application.RemoveTopicReq
 
@@ -116,7 +116,7 @@ func (s *TopicHandler) RemoveTopic(c *gin.Context) {
 // @Param topic_id path uint true "topic ID"
 // @Param request_data body application.UpsertTopicReq true "topic info"
 // @Success 200 {object} nil
-// @Router /api/v1/topic/:topic_id [post]
+// @Router /api/v1/topic/{topic_id} [put]
 func (s *TopicHandler) UpdateTopic(c *gin.Context) {
 	var r application.UpsertTopicReq
 
