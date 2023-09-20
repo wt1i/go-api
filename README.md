@@ -1,4 +1,5 @@
 # go-api
+采用依赖注入的方式，使用 gin 框架做的 go-api，支持 swag 进行 api 展示
 
 ## 启动
 `make run`
