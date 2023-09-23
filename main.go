@@ -17,6 +17,9 @@ func main() {
 		log.Fatalf("provier error:%s\n", err)
 	}
 
-	// app service run
+	// app cmd service run
+	app.RunCMD()
+
+	// app cmd service run
 	app.Run()
 }

@@ -10,6 +10,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/liwentao0503/go-api/cmd"
 	"github.com/liwentao0503/go-api/internal/infras/config"
 	"github.com/liwentao0503/go-api/internal/infras/monitor"
 	"github.com/liwentao0503/go-api/internal/infras/utils"
@@ -84,4 +85,28 @@ func (s *NewsHandler) Run() {
 	<-ctx.Done()
 
 	log.Println("services shutdown success")
+}
+
+// RunCMD start cmd services
+func (s *NewsHandler) RunCMD() {
+	mainCtx, mainCancel := context.WithCancel(context.Background())
+
+	p := cmd.NewTestTask()
+	if err := p.Run(mainCtx); err != nil {
+		panic(err)
+	}
+	ch := make(chan os.Signal, 1)
+	// We'll accept graceful shutdowns when quit via SIGINT (Ctrl+C)
+	// receive signal to exit main goroutine
+	// window signal
+	// signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, syscall.SIGHUP)
+
+	// linux signal
+	// signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM, syscall.SIGUSR2, os.Interrupt, syscall.SIGHUP)
+	signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP)
+
+	// Block until we receive our signal.
+	<-ch
+	mainCancel()
+	log.Println("cmd services shutdown success")
 }
