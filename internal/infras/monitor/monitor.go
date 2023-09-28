@@ -52,5 +52,5 @@ func (s *PrometheusMonitor) Monitor() {
 // check PProf Heartbeat detection
 func (s *PrometheusMonitor) check(w http.ResponseWriter, r *http.Request) {
 	log.Println("request_uri: ", r.RequestURI)
-	w.Write([]byte(`{"code": 0,"message":"ok"}`))
+	_, _ = w.Write([]byte(`{"code": 0,"message":"ok"}`))
 }

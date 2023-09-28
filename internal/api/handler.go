@@ -81,7 +81,9 @@ func (s *NewsHandler) Run() {
 	// Optionally, you could run srv.Shutdown in s goroutine and block on
 	// if your application should wait for other services
 	// to finalize based on context cancellation.
-	go server.Shutdown(ctx)
+	go func() {
+		_ = server.Shutdown(ctx)
+	}()
 	<-ctx.Done()
 
 	log.Println("services shutdown success")
