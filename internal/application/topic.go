@@ -1,8 +1,8 @@
 package application
 
 import (
-	model "github.com/liwentao0503/go-api/internal/domain/model"
-	"github.com/liwentao0503/go-api/internal/domain/repository"
+	model "go-api/internal/domain/model"
+	"go-api/internal/domain/repository"
 )
 
 // TopicService topic service

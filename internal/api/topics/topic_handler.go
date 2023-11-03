@@ -3,9 +3,10 @@ package topics
 import (
 	"net/http"
 
+	"go-api/internal/application"
+	"go-api/internal/infras/utils"
+
 	"github.com/gin-gonic/gin"
-	"github.com/liwentao0503/go-api/internal/application"
-	"github.com/liwentao0503/go-api/internal/infras/utils"
 )
 
 // TopicHandler topic handler

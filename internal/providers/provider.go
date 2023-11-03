@@ -3,17 +3,18 @@ package providers
 import (
 	"fmt"
 
+	"go-api/internal/api"
+	"go-api/internal/api/news"
+	"go-api/internal/api/topics"
+	"go-api/internal/application"
+	"go-api/internal/infras/config"
+	"go-api/internal/infras/migration"
+	"go-api/internal/infras/monitor"
+	"go-api/internal/infras/persistence"
+
 	"github.com/go-god/gdi"
 	"github.com/go-god/gdi/factory"
 	"github.com/go-god/logger"
-	"github.com/liwentao0503/go-api/internal/api"
-	"github.com/liwentao0503/go-api/internal/api/news"
-	"github.com/liwentao0503/go-api/internal/api/topics"
-	"github.com/liwentao0503/go-api/internal/application"
-	"github.com/liwentao0503/go-api/internal/infras/config"
-	"github.com/liwentao0503/go-api/internal/infras/migration"
-	"github.com/liwentao0503/go-api/internal/infras/monitor"
-	"github.com/liwentao0503/go-api/internal/infras/persistence"
 	"go.uber.org/zap"
 )
 

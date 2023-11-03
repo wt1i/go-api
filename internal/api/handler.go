@@ -10,10 +10,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/liwentao0503/go-api/cmd"
-	"github.com/liwentao0503/go-api/internal/infras/config"
-	"github.com/liwentao0503/go-api/internal/infras/monitor"
-	"github.com/liwentao0503/go-api/internal/infras/utils"
+	"go-api/cmd"
+	"go-api/internal/infras/config"
+	"go-api/internal/infras/monitor"
+	"go-api/internal/infras/utils"
 )
 
 // NewsHandler service handler

@@ -5,7 +5,7 @@ import (
 
 	"github.com/jinzhu/gorm"
 
-	model "github.com/liwentao0503/go-api/internal/domain/model"
+	model "go-api/internal/domain/model"
 )
 
 // MigrateAction db migrate action

@@ -4,13 +4,14 @@ import (
 	"log"
 	"net/http"
 
+	"go-api/internal/api/middleware"
+	"go-api/internal/api/news"
+	"go-api/internal/api/topics"
+	"go-api/internal/infras/config"
+	"go-api/internal/infras/migration"
+	"go-api/internal/infras/utils"
+
 	"github.com/gin-gonic/gin"
-	"github.com/liwentao0503/go-api/internal/api/middleware"
-	"github.com/liwentao0503/go-api/internal/api/news"
-	"github.com/liwentao0503/go-api/internal/api/topics"
-	"github.com/liwentao0503/go-api/internal/infras/config"
-	"github.com/liwentao0503/go-api/internal/infras/migration"
-	"github.com/liwentao0503/go-api/internal/infras/utils"
 
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"

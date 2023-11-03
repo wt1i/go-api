@@ -1,5 +1,5 @@
 # go-api
-[![PkgGoDev](https://pkg.go.dev/badge/github.com/liwentao0503/go-api)](https://pkg.go.dev/github.com/liwentao0503/go-api)
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/wt1i/go-api)](https://pkg.go.dev/github.com/wt1i/go-api)
 
 采用依赖注入的方式，使用 gin 框架做的 go-api，支持 swag 进行 api 展示
 

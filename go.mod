@@ -1,4 +1,4 @@
-module github.com/liwentao0503/go-api
+module go-api
 
 go 1.20
 

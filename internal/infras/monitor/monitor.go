@@ -6,8 +6,9 @@ import (
 	"net/http"
 	"net/http/pprof"
 
+	"go-api/internal/infras/config"
+
 	"github.com/go-god/monitor"
-	"github.com/liwentao0503/go-api/internal/infras/config"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )

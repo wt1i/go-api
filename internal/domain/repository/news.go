@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/liwentao0503/go-api/internal/domain/model"
+	"go-api/internal/domain/model"
 )
 
 // NewsRepository represent repository of  the news

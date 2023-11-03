@@ -3,8 +3,8 @@ package application
 import (
 	"gorm.io/gorm"
 
-	model "github.com/liwentao0503/go-api/internal/domain/model"
-	"github.com/liwentao0503/go-api/internal/domain/repository"
+	model "go-api/internal/domain/model"
+	"go-api/internal/domain/repository"
 )
 
 // NewsService news service

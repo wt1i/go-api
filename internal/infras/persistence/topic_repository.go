@@ -4,8 +4,8 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
-	model "github.com/liwentao0503/go-api/internal/domain/model"
-	"github.com/liwentao0503/go-api/internal/domain/repository"
+	model "go-api/internal/domain/model"
+	"go-api/internal/domain/repository"
 )
 
 var _ repository.TopicRepository = (*TopicRepositoryImpl)(nil)

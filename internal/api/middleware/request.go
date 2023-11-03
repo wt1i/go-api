@@ -9,10 +9,11 @@ import (
 	"strings"
 	"time"
 
+	"go-api/internal/infras/utils"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-god/gutils"
 	"github.com/go-god/logger"
-	"github.com/liwentao0503/go-api/internal/infras/utils"
 	"go.uber.org/zap"
 )
 

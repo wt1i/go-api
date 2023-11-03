@@ -1,7 +1,7 @@
 package repository
 
 import (
-	model "github.com/liwentao0503/go-api/internal/domain/model"
+	model "go-api/internal/domain/model"
 )
 
 // TopicRepository represent repository of the topic
