@@ -16,7 +16,7 @@ ENV PATH $PATH:/go/bin
 RUN go mod tidy  
   
 # 暴露容器端口（根据实际需求修改）  
-EXPOSE 8000  
+EXPOSE 8080  
   
 # 设置容器启动命令  
 CMD ["go", "run", "main.go"]

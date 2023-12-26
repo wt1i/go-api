@@ -1,6 +1,6 @@
 app:
   # app run port
-  port: 8000
+  port: 8080
   pprof_port: 8090
   app_env: "local"
   app_debug: true
