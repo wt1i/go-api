@@ -1,7 +1,7 @@
 package application
 
 import (
-	model "go-api/internal/domain/model"
+	"go-api/internal/domain/model"
 	"go-api/internal/domain/repository"
 )
 

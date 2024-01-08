@@ -3,7 +3,7 @@ package application
 import (
 	"gorm.io/gorm"
 
-	model "go-api/internal/domain/model"
+	"go-api/internal/domain/model"
 	"go-api/internal/domain/repository"
 )
 
