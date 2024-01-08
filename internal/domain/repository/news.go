@@ -7,7 +7,7 @@ import (
 // NewsRepository represent repository of  the news
 // Expect implementation by the infras layer
 
-//go:generate mockgen -source=news.go -destination=../mock/mock_news.go -package=mock
+//go:generate mockgen -source=news.go -destination=mock_news.go -package=repository
 type NewsRepository interface {
 	// Get obtain news by id
 	Get(id uint) (*model.News, error)

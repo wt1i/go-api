@@ -7,7 +7,7 @@ import (
 // TopicRepository represent repository of the topic
 // Expect implementation by the infras layer
 
-//go:generate mockgen -source=topic.go -destination=../mock/mock_topic.go -package=mock
+//go:generate mockgen -source=topic.go -destination=mock_topic.go -package=repository
 type TopicRepository interface {
 	Get(id uint) (*model.Topic, error)
 	GetAll() ([]model.Topic, error)

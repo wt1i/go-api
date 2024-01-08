@@ -3,8 +3,8 @@ package application
 import (
 	"testing"
 
-	"go-api/internal/domain/mock"
 	"go-api/internal/domain/model"
+	mock "go-api/internal/domain/repository"
 
 	"github.com/golang/mock/gomock"
 )
