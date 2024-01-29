@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"context"
 	model "go-api/internal/domain/model"
 )
 
@@ -9,9 +10,9 @@ import (
 
 //go:generate mockgen -source=topic.go -destination=mock_topic.go -package=repository
 type TopicRepository interface {
-	Get(id uint) (*model.Topic, error)
-	GetAll() ([]model.Topic, error)
-	Save(*model.Topic) error
-	Remove(id uint) error
-	Update(*model.Topic) error
+	Get(ctx context.Context, id uint) (*model.Topic, error)
+	GetAll(ctx context.Context) ([]model.Topic, error)
+	Save(ctx context.Context, topic *model.Topic) error
+	Remove(ctx context.Context, id uint) error
+	Update(ctx context.Context, topic *model.Topic) error
 }

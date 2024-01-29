@@ -1,6 +1,8 @@
 package persistence
 
 import (
+	"context"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
@@ -16,7 +18,7 @@ type NewsRepositoryImpl struct {
 }
 
 // Get news by id return domain.news
-func (r *NewsRepositoryImpl) Get(id uint) (*model.News, error) {
+func (r *NewsRepositoryImpl) Get(ctx context.Context, id uint) (*model.News, error) {
 	news := &model.News{}
 	if err := r.DB.Preload("Topic").First(&news, id).Error; err != nil {
 		return nil, err
@@ -25,7 +27,7 @@ func (r *NewsRepositoryImpl) Get(id uint) (*model.News, error) {
 }
 
 // Save to add news
-func (r *NewsRepositoryImpl) Save(news *model.News) error {
+func (r *NewsRepositoryImpl) Save(ctx context.Context, news *model.News) error {
 	if err := r.DB.Save(&news).Error; err != nil {
 		return err
 	}
@@ -34,7 +36,7 @@ func (r *NewsRepositoryImpl) Save(news *model.News) error {
 }
 
 // Remove to delete news by id
-func (r *NewsRepositoryImpl) Remove(id uint) (err error) {
+func (r *NewsRepositoryImpl) Remove(ctx context.Context, id uint) (err error) {
 	tx := r.DB.Begin()
 
 	defer func() {
@@ -54,7 +56,7 @@ func (r *NewsRepositoryImpl) Remove(id uint) (err error) {
 }
 
 // Update is update news
-func (r *NewsRepositoryImpl) Update(news *model.News) error {
+func (r *NewsRepositoryImpl) Update(ctx context.Context, news *model.News) error {
 	n := model.News{Title: news.Title, Slug: news.Slug,
 		Content: news.Content, Status: news.Status, Topic: news.Topic}
 	n.UpdatedAt = news.UpdatedAt
@@ -66,7 +68,7 @@ func (r *NewsRepositoryImpl) Update(news *model.News) error {
 }
 
 // GetAll News return all domain.news
-func (r *NewsRepositoryImpl) GetAllByStatus(status model.NewsStatus, pagination model.Pagination) ([]model.News, error) {
+func (r *NewsRepositoryImpl) GetAllByStatus(ctx context.Context, status model.NewsStatus, pagination model.Pagination) ([]model.News, error) {
 	var db *gorm.DB
 	if status == model.NewsStatusDelete {
 		db = r.DB.Unscoped()

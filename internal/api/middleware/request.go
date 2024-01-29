@@ -64,21 +64,16 @@ func RecoverHandler() gin.HandlerFunc {
 func AccessLog() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		start := time.Now()
-		// log.Println("exec begin", nil)
-		// log.Println("request before")
-		// log.Println("request method: ", r.Method)
-		// log.Println("request uri: ", r.RequestURI)
 
 		// x-request-id
-		reqId := c.GetHeader("x-request-id")
-		if reqId == "" {
-			reqId = gutils.Uuid()
+		reqID := c.GetHeader("x-request-id")
+		if reqID == "" {
+			reqID = gutils.Uuid()
 		}
 
-		// log.Println("log_id: ", reqId)
 		userAgentKey := logger.CtxKey{Name: "user-agent"}
 		userAgent := c.GetHeader("User-Agent")
-		c.Request = utils.ContextSet(c.Request, logger.XRequestID, reqId)
+		c.Request = utils.ContextSet(c.Request, logger.XRequestID, reqID)
 		c.Request = utils.ContextSet(c.Request, logger.ReqClientIP, c.Request.RemoteAddr)
 		c.Request = utils.ContextSet(c.Request, logger.RequestMethod, c.Request.Method)
 		c.Request = utils.ContextSet(c.Request, logger.RequestURI, c.Request.RequestURI)
@@ -89,11 +84,6 @@ func AccessLog() gin.HandlerFunc {
 		)
 
 		c.Next()
-
-		// log.Println("exec end", map[string]interface{}{
-		// 	"exec_time": time.Since(start).Seconds(),
-		// })
-
 		logger.Info(c.Request.Context(), "exec end", map[string]interface{}{
 			"exec_time": time.Since(start).Seconds(),
 		})

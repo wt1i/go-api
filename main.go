@@ -18,7 +18,7 @@ func main() {
 	}
 
 	// app cmd service run
-	app.RunCMD()
+	// go app.RunCMD()
 
 	// app cmd service run
 	app.Run()

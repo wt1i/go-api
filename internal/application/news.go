@@ -1,9 +1,11 @@
 package application
 
 import (
+	"context"
+
 	"gorm.io/gorm"
 
-	"go-api/internal/domain/model"
+	model "go-api/internal/domain/model"
 	"go-api/internal/domain/repository"
 )
 
@@ -18,8 +20,8 @@ type GetNewsReq struct {
 }
 
 // GetNews returns domain.news by id
-func (s *NewsService) GetNews(req GetNewsReq) (*model.News, error) {
-	return s.NewsRepo.Get(req.NewsID)
+func (s *NewsService) GetNews(ctx context.Context, req GetNewsReq) (*model.News, error) {
+	return s.NewsRepo.Get(ctx, req.NewsID)
 }
 
 type UpsertNewsReq struct {
@@ -42,8 +44,8 @@ func (a UpsertNewsReq) BuildModelNews() model.News {
 }
 
 // AddNews saves new news
-func (s *NewsService) AddNews(p model.News) error {
-	return s.NewsRepo.Save(&p)
+func (s *NewsService) AddNews(ctx context.Context, p model.News) error {
+	return s.NewsRepo.Save(ctx, &p)
 }
 
 type RemoveNewsReq struct {
@@ -51,15 +53,15 @@ type RemoveNewsReq struct {
 }
 
 // RemoveNews do remove news by id
-func (s *NewsService) RemoveNews(id uint) error {
-	return s.NewsRepo.Remove(id)
+func (s *NewsService) RemoveNews(ctx context.Context, id uint) error {
+	return s.NewsRepo.Remove(ctx, id)
 }
 
 // UpdateNews do remove news by id
-func (s *NewsService) UpdateNews(p model.News, id uint) error {
+func (s *NewsService) UpdateNews(ctx context.Context, id uint, p model.News) error {
 	p.ID = id
 
-	return s.NewsRepo.Update(&p)
+	return s.NewsRepo.Update(ctx, &p)
 }
 
 type GetAllNewsReq struct {
@@ -68,6 +70,6 @@ type GetAllNewsReq struct {
 }
 
 // GetAllNewsByFilter return all model.News by filter
-func (s *NewsService) GetAllNewsByFilter(req GetAllNewsReq) ([]model.News, error) {
-	return s.NewsRepo.GetAllByStatus(req.Status, req.Pagination)
+func (s *NewsService) GetAllNewsByFilter(ctx context.Context, req GetAllNewsReq) ([]model.News, error) {
+	return s.NewsRepo.GetAllByStatus(ctx, req.Status, req.Pagination)
 }

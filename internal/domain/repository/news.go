@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"context"
 	"go-api/internal/domain/model"
 )
 
@@ -10,13 +11,13 @@ import (
 //go:generate mockgen -source=news.go -destination=mock_news.go -package=repository
 type NewsRepository interface {
 	// Get obtain news by id
-	Get(id uint) (*model.News, error)
+	Get(ctx context.Context, id uint) (*model.News, error)
 	// GetAllByStatus obtain news by status
-	GetAllByStatus(status model.NewsStatus, pagination model.Pagination) ([]model.News, error)
+	GetAllByStatus(ctx context.Context, status model.NewsStatus, pagination model.Pagination) ([]model.News, error)
 	// Save news save
-	Save(*model.News) error
+	Save(ctx context.Context, news *model.News) error
 	// Remove news remove by id
-	Remove(id uint) error
+	Remove(ctx context.Context, id uint) error
 	// Update news update by entity
-	Update(*model.News) error
+	Update(ctx context.Context, news *model.News) error
 }

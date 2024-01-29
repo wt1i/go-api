@@ -31,7 +31,7 @@ func (s *TopicHandler) GetTopic(c *gin.Context) {
 		return
 	}
 
-	topic, err := s.TopicService.GetTopic(r.TopicID)
+	topic, err := s.TopicService.GetTopic(c.Request.Context(), r.TopicID)
 	if err != nil {
 		utils.Error(c, http.StatusInternalServerError, err.Error())
 		return
@@ -49,7 +49,7 @@ func (s *TopicHandler) GetTopic(c *gin.Context) {
 // @Success 200 {object} model.Topic
 // @Router /api/v1/topic [get]
 func (s *TopicHandler) GetAllTopic(c *gin.Context) {
-	topics, err := s.TopicService.GetAllTopic()
+	topics, err := s.TopicService.GetAllTopic(c.Request.Context())
 	if err != nil {
 		utils.Error(c, http.StatusInternalServerError, err.Error())
 		return
@@ -75,7 +75,7 @@ func (s *TopicHandler) CreateTopic(c *gin.Context) {
 		return
 	}
 
-	if err := s.TopicService.AddTopic(r.Name, r.Slug); err != nil {
+	if err := s.TopicService.AddTopic(c.Request.Context(), r.Name, r.Slug); err != nil {
 		utils.Error(c, http.StatusInternalServerError, err.Error())
 		return
 	}
@@ -100,7 +100,7 @@ func (s *TopicHandler) RemoveTopic(c *gin.Context) {
 		return
 	}
 
-	if err := s.TopicService.RemoveTopic(r.TopicID); err != nil {
+	if err := s.TopicService.RemoveTopic(c.Request.Context(), r.TopicID); err != nil {
 		utils.Error(c, http.StatusInternalServerError, err.Error())
 		return
 	}
@@ -131,7 +131,7 @@ func (s *TopicHandler) UpdateTopic(c *gin.Context) {
 		return
 	}
 
-	if err := s.TopicService.UpdateTopic(r.BuildModelTopic(), r.ID); err != nil {
+	if err := s.TopicService.UpdateTopic(c.Request.Context(), r.ID, r.BuildModelTopic()); err != nil {
 		utils.Error(c, http.StatusInternalServerError, err.Error())
 		return
 	}

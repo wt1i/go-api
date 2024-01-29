@@ -1,6 +1,8 @@
 package persistence
 
 import (
+	"context"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
@@ -16,7 +18,7 @@ type TopicRepositoryImpl struct {
 }
 
 // Get topic by id return domain.topic
-func (r *TopicRepositoryImpl) Get(id uint) (*model.Topic, error) {
+func (r *TopicRepositoryImpl) Get(ctx context.Context, id uint) (*model.Topic, error) {
 	topic := &model.Topic{}
 	if err := r.DB.Preload("News").First(&topic, id).Error; err != nil {
 		return nil, err
@@ -25,7 +27,7 @@ func (r *TopicRepositoryImpl) Get(id uint) (*model.Topic, error) {
 }
 
 // GetAll topic return all domain.topic
-func (r *TopicRepositoryImpl) GetAll() ([]model.Topic, error) {
+func (r *TopicRepositoryImpl) GetAll(ctx context.Context) ([]model.Topic, error) {
 	topics := []model.Topic{}
 	if err := r.DB.Find(&topics).Error; err != nil {
 		return nil, err
@@ -35,7 +37,7 @@ func (r *TopicRepositoryImpl) GetAll() ([]model.Topic, error) {
 }
 
 // Save to add topic
-func (r *TopicRepositoryImpl) Save(topic *model.Topic) error {
+func (r *TopicRepositoryImpl) Save(ctx context.Context, topic *model.Topic) error {
 	if err := r.DB.Save(&topic).Error; err != nil {
 		return err
 	}
@@ -44,7 +46,7 @@ func (r *TopicRepositoryImpl) Save(topic *model.Topic) error {
 }
 
 // Remove delete topic and news
-func (r *TopicRepositoryImpl) Remove(id uint) (err error) {
+func (r *TopicRepositoryImpl) Remove(ctx context.Context, id uint) (err error) {
 	tx := r.DB.Begin()
 
 	defer func() {
@@ -68,7 +70,7 @@ func (r *TopicRepositoryImpl) Remove(id uint) (err error) {
 }
 
 // Update data topic
-func (r *TopicRepositoryImpl) Update(topic *model.Topic) error {
+func (r *TopicRepositoryImpl) Update(ctx context.Context, topic *model.Topic) error {
 	if err := r.DB.Model(&topic).UpdateColumns(model.Topic{
 		Name: topic.Name,
 		Slug: topic.Slug,

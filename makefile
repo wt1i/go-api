@@ -9,13 +9,13 @@ install:
 	go install github.com/swaggo/swag/cmd/swag@latest
 	swag init
 	@go mod tidy
-test:
-	go test ./...
 gotool:
 	go fmt ./...
 	golangci-lint run ./...
 run:
 	go run main.go
+docker:
+	docker buildx build -t go-api-v1 . 
 clean:
 	@if [ -f ${BINARY} ] ; then rm ${BINARY} ; fi
 help:

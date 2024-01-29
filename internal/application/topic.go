@@ -1,7 +1,8 @@
 package application
 
 import (
-	"go-api/internal/domain/model"
+	"context"
+	model "go-api/internal/domain/model"
 	"go-api/internal/domain/repository"
 )
 
@@ -15,13 +16,13 @@ type GetTopicReq struct {
 }
 
 // GetTopic returns a topic by id
-func (s *TopicService) GetTopic(id uint) (*model.Topic, error) {
-	return s.TopicRepo.Get(id)
+func (s *TopicService) GetTopic(ctx context.Context, id uint) (*model.Topic, error) {
+	return s.TopicRepo.Get(ctx, id)
 }
 
 // GetAllTopic return all topics
-func (s *TopicService) GetAllTopic() ([]model.Topic, error) {
-	return s.TopicRepo.GetAll()
+func (s *TopicService) GetAllTopic(ctx context.Context) ([]model.Topic, error) {
+	return s.TopicRepo.GetAll(ctx)
 }
 
 type UpsertTopicReq struct {
@@ -38,12 +39,12 @@ func (a UpsertTopicReq) BuildModelTopic() model.Topic {
 }
 
 // AddTopic saves new topic
-func (s *TopicService) AddTopic(name string, slug string) error {
+func (s *TopicService) AddTopic(ctx context.Context, name string, slug string) error {
 	u := &model.Topic{
 		Name: name,
 		Slug: slug,
 	}
-	return s.TopicRepo.Save(u)
+	return s.TopicRepo.Save(ctx, u)
 }
 
 type RemoveTopicReq struct {
@@ -51,12 +52,12 @@ type RemoveTopicReq struct {
 }
 
 // RemoveTopic do remove topic by id
-func (s *TopicService) RemoveTopic(id uint) error {
-	return s.TopicRepo.Remove(id)
+func (s *TopicService) RemoveTopic(ctx context.Context, id uint) error {
+	return s.TopicRepo.Remove(ctx, id)
 }
 
 // UpdateTopic do update topic by id
-func (s *TopicService) UpdateTopic(topic model.Topic, id uint) error {
+func (s *TopicService) UpdateTopic(ctx context.Context, id uint, topic model.Topic) error {
 	topic.ID = id
-	return s.TopicRepo.Update(&topic)
+	return s.TopicRepo.Update(ctx, &topic)
 }

@@ -32,7 +32,7 @@ func (s *NewsHandler) GetNews(c *gin.Context) {
 	}
 
 	// param is numeric
-	news, err := s.NewsService.GetNews(r)
+	news, err := s.NewsService.GetNews(c.Request.Context(), r)
 	if err != nil {
 		utils.Error(c, http.StatusInternalServerError, err.Error())
 		return
@@ -62,7 +62,7 @@ func (s *NewsHandler) GetAllNews(c *gin.Context) {
 	}
 
 	// if status parameter exist draft|deleted|publish
-	news, err := s.NewsService.GetAllNewsByFilter(r)
+	news, err := s.NewsService.GetAllNewsByFilter(c.Request.Context(), r)
 	if err != nil {
 		utils.Error(c, http.StatusInternalServerError, err.Error())
 		return
@@ -88,7 +88,7 @@ func (s *NewsHandler) CreateNews(c *gin.Context) {
 		return
 	}
 
-	err := s.NewsService.AddNews(r.BuildModelNews())
+	err := s.NewsService.AddNews(c.Request.Context(), r.BuildModelNews())
 	if err != nil {
 		utils.Error(c, http.StatusInternalServerError, err.Error())
 		return
@@ -114,7 +114,7 @@ func (s *NewsHandler) RemoveNews(c *gin.Context) {
 		return
 	}
 
-	if err := s.NewsService.RemoveNews(r.NewsID); err != nil {
+	if err := s.NewsService.RemoveNews(c.Request.Context(), r.NewsID); err != nil {
 		utils.Error(c, http.StatusInternalServerError, err.Error())
 		return
 	}
@@ -145,7 +145,7 @@ func (s *NewsHandler) UpdateNews(c *gin.Context) {
 		return
 	}
 
-	if err := s.NewsService.UpdateNews(r.BuildModelNews(), r.ID); err != nil {
+	if err := s.NewsService.UpdateNews(c.Request.Context(), r.ID, r.BuildModelNews()); err != nil {
 		utils.Error(c, http.StatusInternalServerError, err.Error())
 		return
 	}
