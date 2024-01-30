@@ -39,7 +39,6 @@ func (s *NewsHandler) GetNews(c *gin.Context) {
 	}
 
 	utils.JSON(c, http.StatusOK, news)
-
 }
 
 // GetAllNews godoc
