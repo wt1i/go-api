@@ -3,9 +3,9 @@ package migration
 import (
 	"log"
 
-	"github.com/jinzhu/gorm"
-
 	model "go-api/internal/domain/model"
+
+	"github.com/jinzhu/gorm"
 )
 
 // MigrateAction db migrate action

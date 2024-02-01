@@ -3,10 +3,10 @@ package application
 import (
 	"context"
 
-	"gorm.io/gorm"
-
 	model "go-api/internal/domain/model"
 	"go-api/internal/domain/repository"
+
+	"gorm.io/gorm"
 )
 
 // NewsService news service

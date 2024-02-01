@@ -3,11 +3,11 @@ package persistence
 import (
 	"context"
 
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
-
 	model "go-api/internal/domain/model"
 	"go-api/internal/domain/repository"
+
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 var _ repository.NewsRepository = (*NewsRepositoryImpl)(nil)

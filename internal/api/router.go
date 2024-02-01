@@ -12,7 +12,6 @@ import (
 	"go-api/internal/infras/utils"
 
 	"github.com/gin-gonic/gin"
-
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )

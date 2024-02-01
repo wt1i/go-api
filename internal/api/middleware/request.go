@@ -31,11 +31,6 @@ func RecoverHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {
-				// log.Println("error: ", err)
-				// log.Println("exec panic error", map[string]interface{}{
-				// 	"trace_error": string(debug.Stack()),
-				// })
-
 				ctx := c.Request.Context()
 				logger.Info(ctx, "exec panic error",
 					zap.String("module", "web"), zap.String("trace_error", string(debug.Stack())),
