@@ -3,12 +3,13 @@
 
 采用依赖注入的方式，使用 gin 框架做的 go-api，支持 swag 进行 api 展示
 
-## 启动
+## run
 `make run`
 
-## 请求 api
+## api
 - http://localhost:8080/api/v1/swagger/index.html`
 
 ## prometheus metrics and pprof
 - http://localhost:8090/metrics
 - http://localhost:8090/debug/pprof/
+go tool pprof http://localhost:8090/debug/pprof/heap
