@@ -13,3 +13,4 @@
 - http://localhost:8090/metrics
 - http://localhost:8090/debug/pprof/
 go tool pprof http://localhost:8090/debug/pprof/heap
+go tool pprof -seconds 5 http://localhost:8090/debug/pprof/profile
