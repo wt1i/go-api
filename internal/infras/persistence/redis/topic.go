@@ -2,8 +2,8 @@ package redis
 
 import (
 	"context"
+	"github.com/go-redis/redis/v8"
 
-	"github.com/redis/go-redis"
 	"go-api/internal/domain/model"
 )
 

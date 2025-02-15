@@ -7,7 +7,7 @@ Adopt dependency injection, use go-api made by gin framework, and support swag f
 `make run`
 
 ## api
-- http://localhost:8080/api/v1/swagger/index.html`
+- http://localhost:8080/api/v1/swagger/index.html
 
 ## prometheus metrics and pprof
 - http://localhost:8090/metrics
