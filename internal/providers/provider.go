@@ -2,7 +2,11 @@ package providers
 
 import (
 	"fmt"
+	"go-api/internal/infras/persistence/adapt"
 
+	"github.com/go-god/gdi"
+	"github.com/go-god/gdi/factory"
+	"github.com/go-god/logger"
 	"go-api/internal/api"
 	"go-api/internal/api/news"
 	"go-api/internal/api/topics"
@@ -10,11 +14,6 @@ import (
 	"go-api/internal/infras/config"
 	"go-api/internal/infras/migration"
 	"go-api/internal/infras/monitor"
-	"go-api/internal/infras/persistence"
-
-	"github.com/go-god/gdi"
-	"github.com/go-god/gdi/factory"
-	"github.com/go-god/logger"
 	"go.uber.org/zap"
 )
 
@@ -32,8 +31,8 @@ func Inject(app *api.NewsHandler) error {
 		&gdi.Object{Value: &topics.TopicHandler{}},
 		&gdi.Object{Value: &application.TopicService{}},
 		&gdi.Object{Value: &application.NewsService{}},
-		&gdi.Object{Value: &persistence.NewsRepositoryImpl{}},
-		&gdi.Object{Value: &persistence.TopicRepositoryImpl{}},
+		&gdi.Object{Value: &adapt.NewsRepositoryImpl{}},
+		&gdi.Object{Value: &adapt.TopicRepositoryImpl{}},
 		&gdi.Object{Value: &api.RouterHandler{}},
 		&gdi.Object{Value: &monitor.PrometheusMonitor{}},
 	)

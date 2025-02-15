@@ -1,6 +1,8 @@
-package persistence
+package mysql
 
 import (
+	"time"
+
 	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"
 )
@@ -33,4 +35,12 @@ func IsDBError(err error) bool {
 
 func IsDBRecordNotFound(err error) bool {
 	return errors.Is(err, gorm.ErrRecordNotFound)
+}
+
+// BaseModel base model
+type BaseModel struct {
+	ID        uint       `gorm:"id primary_key" json:"id"`
+	CreatedAt time.Time  `json:"created_at"`
+	UpdatedAt time.Time  `json:"updated_at"`
+	DeletedAt *time.Time `gorm:"deleted_at" json:"deleted_at"`
 }

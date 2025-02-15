@@ -1,24 +1,33 @@
-package persistence
+package mysql
 
 import (
 	"context"
 
-	model "go-api/internal/domain/model"
-	"go-api/internal/domain/repository"
-
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	model "go-api/internal/domain/model"
 )
 
-var _ repository.TopicRepository = (*TopicRepositoryImpl)(nil)
+// News represent entity of the news
+type Topic struct {
+	BaseModel
+	TopicID uint   `json:"topic_id"`
+	Title   string `json:"title"`
+	Slug    string `json:"slug"`
+	Content string `json:"content" gorm:"text"`
+	Status  string `json:"status"`
+}
 
-// TopicRepositoryImpl Implements repository.TopicRepository
-type TopicRepositoryImpl struct {
+type TopicClient struct {
 	DB *gorm.DB `inject:""`
 }
 
+func NewTopicClient(db *gorm.DB) *TopicClient {
+	return &TopicClient{DB: db}
+}
+
 // Get topic by id return domain.topic
-func (r *TopicRepositoryImpl) Get(ctx context.Context, id uint) (*model.Topic, error) {
+func (r *TopicClient) Get(ctx context.Context, id uint) (*model.Topic, error) {
 	topic := &model.Topic{}
 	if err := r.DB.Preload("News").First(&topic, id).Error; err != nil {
 		return nil, err
@@ -27,7 +36,7 @@ func (r *TopicRepositoryImpl) Get(ctx context.Context, id uint) (*model.Topic, e
 }
 
 // GetAll topic return all domain.topic
-func (r *TopicRepositoryImpl) GetAll(ctx context.Context) ([]model.Topic, error) {
+func (r *TopicClient) GetAll(ctx context.Context) ([]model.Topic, error) {
 	topics := []model.Topic{}
 	if err := r.DB.Find(&topics).Error; err != nil {
 		return nil, err
@@ -37,7 +46,7 @@ func (r *TopicRepositoryImpl) GetAll(ctx context.Context) ([]model.Topic, error)
 }
 
 // Save to add topic
-func (r *TopicRepositoryImpl) Save(ctx context.Context, topic *model.Topic) error {
+func (r *TopicClient) Save(ctx context.Context, topic *model.Topic) error {
 	if err := r.DB.Save(&topic).Error; err != nil {
 		return err
 	}
@@ -46,7 +55,7 @@ func (r *TopicRepositoryImpl) Save(ctx context.Context, topic *model.Topic) erro
 }
 
 // Remove delete topic and news
-func (r *TopicRepositoryImpl) Remove(ctx context.Context, id uint) (err error) {
+func (r *TopicClient) Remove(ctx context.Context, id uint) (err error) {
 	tx := r.DB.Begin()
 
 	defer func() {
@@ -70,7 +79,7 @@ func (r *TopicRepositoryImpl) Remove(ctx context.Context, id uint) (err error) {
 }
 
 // Update data topic
-func (r *TopicRepositoryImpl) Update(ctx context.Context, topic *model.Topic) error {
+func (r *TopicClient) Update(ctx context.Context, topic *model.Topic) error {
 	if err := r.DB.Model(&topic).UpdateColumns(model.Topic{
 		Name: topic.Name,
 		Slug: topic.Slug,

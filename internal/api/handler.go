@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -49,7 +50,7 @@ func (s *NewsHandler) Run() {
 		defer utils.Recover()
 
 		if err := server.ListenAndServe(); err != nil {
-			if err != http.ErrServerClosed {
+			if !errors.Is(err, http.ErrServerClosed) {
 				log.Println("services listen error:", err)
 				return
 			}
